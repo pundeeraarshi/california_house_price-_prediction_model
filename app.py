@@ -27,7 +27,7 @@ st.sidebar.image('https://assets-news.housing.com/news/wp-content/uploads/2022/0
 
 
 # read_data
-temp_df = pd.read_csv('california.csv')
+temp_df = pd.read_csv('California.csv')
 
 random.seed(52)
 
