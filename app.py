@@ -3,6 +3,9 @@ import pandas as pd
 import random
 from sklearn.preprocessing import StandardScaler
 import pickle
+import warnings
+import time
+warnings.filterwarnings("ignore")
 
 
 # Title
@@ -17,8 +20,8 @@ st.image('https://cdn.mos.cms.futurecdn.net/HpaLYw8TSnLqjvAwCXwEfe.jpg')
 
 st.header('Model of housing prices to predict median house values in California ',divider=True)
 
-st.subheader('''User Must Enter Given values to predict Price:
-['MedInc', 'HouseAge', 'AveRooms', 'AveBedrms', 'Population', 'AveOccup']''')
+#st.subheader('''User Must Enter Given values to predict Price:
+#['MedInc', 'HouseAge', 'AveRooms', 'AveBedrms', 'Population', 'AveOccup']''')
 
 
 st.sidebar.title('Select House Features 🏠')
@@ -44,7 +47,6 @@ for i in temp_df[col]:
 
 ss = StandardScaler()
 ss.fit(temp_df[col])
-
 final_value = ss.transform([all_values])
 
 
@@ -52,10 +54,7 @@ with open('house_price_pred_ridge_model.pkl','rb') as f:
     chatgpt = pickle.load(f)
 
 
-price = chatgpt.predict(final_value)[0]
-
-import time
-
+price = chatgpt.predict(final_value)[0]*1000000
 
 st.write(pd.DataFrame(dict(zip(col,all_values)),index = [1]))
 progress_bar = st.progress(0)
